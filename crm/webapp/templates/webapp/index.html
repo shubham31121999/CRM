@@ -1,1 +1,34 @@
-<h1>Hello World!</h1>
+{% extends 'webapp/base.html' %}
+
+{% block content %}
+
+    <bobdy>
+
+        <br>
+        <br>
+         
+        <div class="text-center">
+            <h3>CRM MODULE </h3>
+
+            <br>
+
+            <h5>
+                Keeping track of records.
+            </h5>
+            <hr>
+            <br>
+
+            <a class="btn btn-primary" type="button" href="{% url 'register' %}">
+             Create Your Account
+            </a>
+
+
+        </div>
+
+
+    </bobdy>
+
+
+
+
+{% endblock %}
