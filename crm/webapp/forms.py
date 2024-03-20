@@ -2,6 +2,7 @@ from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth.models import User
 
 from django import forms
+from .models import ClientRecord
 
 from django.forms.widgets import PasswordInput,TextInput
 
@@ -21,3 +22,21 @@ class LoginForm(AuthenticationForm):
     
     username = forms.CharField(widget=TextInput())
     password = forms.CharField(widget=PasswordInput())       
+
+
+# - Add record form
+    
+class CreaterecordForm(forms.ModelForm):
+    class Meta:
+
+        model = ClientRecord
+        fields = ['first_name','last_name','email','phone','address','city','state','country']
+
+
+# - Update record Form
+        
+class UpdaterecordForm(forms.ModelForm):
+    class Meta:
+
+        model = ClientRecord
+        fields = ['first_name','last_name','email','phone','address','city','state','country']

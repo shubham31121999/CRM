@@ -1,17 +1,59 @@
 {% extends 'webapp/base.html' %}
 {% block content %}
-<h1>Welcome to dashboard {{ user }}</h1>
-     {% for Clientrecord in clientrecord %}
+<h5>Welcome to dashboard {{ user }}</h5>
 
-     {{ Clientrecord.id }}
+<hr>
+<a class ="btn btn-primary btn-sm" href="{% url 'create'%}">
+     Create a new record
+</a>
 
-     {{ Clientrecord.first_name }}
+<hr>
 
-     {{ Clientrecord.last_name }}
+  <table class="table  table-hower table-bordered">
+     <thead class="table-dark">
+          <tr>
+               <th scope="col">ID</th>
+               <th scope="col">Full name</th>
+               <th scope="col">Email</th>
+               <th scope="col">Phone</th>
+               <th scope="col">Adress</th>
+               <th scope="col">City</th>
+               <th scope="col">State</th>
+               <th scope="col">Country</th>
+               <th scope="col">Creation Date</th>
+     
+               <th scope="col">View</th>
+     
+          </tr>
+     </thead>
+     <tbody>
+      {% if clientrecord %}
+          {% for Clientrecord in clientrecord %}
+          <tr>
+               <td>{{Clientrecord.id}}</td>
+               <td>{{Clientrecord.first_name}} {{Clientrecord.last_name}}</td>
+               <td>{{Clientrecord.email}}</td>
+               <td>{{Clientrecord.phone}}</td>
+               <td>{{Clientrecord.address}}</td>
+               <td>{{Clientrecord.city}}</td>
+               <td>{{Clientrecord.state}}</td>
+               <td>{{Clientrecord.country}}</td>
+               <td>{{Clientrecord.created_date}}</td>
+               
+          </tr>
+          {% endfor %}
+
+      {% endif %}
+
+     </tbody>
+     
 
 
-     {% endfor %}
 
+
+
+  </table>
+     
 
 
 {% endblock %}
