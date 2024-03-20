@@ -1,4 +1,17 @@
 {% extends 'webapp/base.html' %}
 {% block content %}
 <h1>Welcome to dashboard {{ user }}</h1>
+     {% for Clientrecord in clientrecord %}
+
+     {{ Clientrecord.id }}
+
+     {{ Clientrecord.first_name }}
+
+     {{ Clientrecord.last_name }}
+
+
+     {% endfor %}
+
+
+
 {% endblock %}

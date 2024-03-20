@@ -4,6 +4,8 @@ from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate
 from .forms import CreateUserForm, LoginForm
 
+
+from .models import ClientRecord
 from django.contrib.auth.decorators import login_required
 
 
@@ -65,7 +67,16 @@ def user_login(request):
 
 @login_required(login_url='login')
 def dashboard(request):
-    return render(request, 'webapp/dashboard.html')
+
+
+    user_records = ClientRecord.objects.all()
+    
+    context = {'clientrecord':user_records}
+
+    
+    return render(request, 'webapp/dashboard.html',context=context)
+
+
 
 
 
