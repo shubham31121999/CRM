@@ -39,6 +39,10 @@
                <td>{{Clientrecord.state}}</td>
                <td>{{Clientrecord.country}}</td>
                <td>{{Clientrecord.created_date}}</td>
+
+               <td>
+                    <a href="{% url 'record' Clientrecord.id %}">Click Me</a>
+               </td>
                
           </tr>
           {% endfor %}

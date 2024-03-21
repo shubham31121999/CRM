@@ -2,9 +2,9 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate
-from .forms import CreateUserForm, LoginForm,CreaterecordForm,UpdaterecordForm
+from .forms import CreateUserForm, LoginForm,CreaterecordForm,UpdateRecordForm
 
-
+from django.db.models.query_utils import DeferredAttribute
 from .models import ClientRecord
 from django.contrib.auth.decorators import login_required
 
@@ -96,7 +96,37 @@ def create_record(request):
     return render(request,'webapp/create.html',context=context)
 
 
+# --Update a record 
 
+@login_required(login_url='login')
+def update_record(request, pk):
+    record = ClientRecord.objects.get(id=pk)
+
+    form = UpdateRecordForm(instance=record)
+
+    if request.method == 'POST':
+
+        form = UpdateRecordForm(request.POST, instance = record)
+
+        if form.is_valid():
+            
+            form.save()
+
+            return redirect("dashboard")
+        
+
+    context = {'form':form}
+
+    return render(request, 'webapp/update.html', context = context)
+
+# - Read or check a single record 
+
+@login_required(login_url='login')
+def singular_record(request, pk):
+   all_records = ClientRecord.objects.get(id = pk)
+   context = {'record':all_records}
+
+   return render(request, 'webapp/views.html', context=context)
 
 
 
@@ -110,3 +140,15 @@ def user_logout(request):
     auth.logout(request)
 
     return redirect("login")
+
+
+# -- delete records
+
+@login_required(login_url='login')
+def delete_record(request, pk):
+
+    record = ClientRecord.objects.get(id=pk)
+
+    record.delete()
+
+    return redirect('dashboard')
